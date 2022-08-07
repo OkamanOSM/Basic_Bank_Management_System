@@ -1,0 +1,340 @@
+
+//BANK MANAGEMENT SYSTEM -OKAMANOSM
+
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+int t = 0; //total bank account numbers
+
+
+class person {
+private:
+	string name;
+	int age;
+	string tcno;
+public:
+	
+	void ax (string name, int age, string tcno);
+
+	string getid();
+};
+
+void person::ax(string name, int age, string tcno) {
+	
+	this->name = name;
+
+	this->age = age;
+
+	this-> tcno = tcno; }
+
+string person::getid() {
+	return tcno;
+}
+
+class banka : public person {
+	int moneyvalue = 0;
+	string currency;
+
+public:
+
+	banka();
+	void awvalue (string name, int age, string tcno,string currency)  {
+		this->currency = currency;
+
+		cout << "The bank account has been established." << endl;
+		ax( name,age,tcno);
+	}
+
+
+	void avalue (string name, int age, string tcno, string currency, int moneyvalue)  {
+		this->moneyvalue = moneyvalue;
+		this->currency = currency;
+
+		cout << "The bank account has succesfully been established" << endl;
+
+		ax(name,age,tcno);
+	}
+
+
+	void setvalue(int moneyval)	{
+
+		this->moneyvalue += moneyval;
+
+  }
+	
+	void getvalue();
+	
+
+	void withdraw(int with);
+};
+
+banka::banka() {
+
+}
+void banka::getvalue() {
+	cout << "Your current value is '" << moneyvalue << " " << currency << "'." << endl;
+}
+void banka::withdraw(int with) {
+	this->moneyvalue -= with;
+}
+
+
+
+banka baba[15]; //15 accounts have been established without any info
+
+
+
+void establishing() {
+	cout << "Welcome to the Bank Official" << endl;
+	cout << "You are about to establish a new bank account, Do you agree the terms? " << endl;
+	cout << "1) Agree" << endl << "2) Rejection" << endl;
+	int a; 
+	cin >> a;
+	if (a == 1) {
+		cout << "Please wait..." << endl;
+
+	}
+	else if (a == 2) {
+		cout << "Returning the main page..." << endl;
+		return;
+	}
+	else { cout << "not available answer." << endl;  return; }
+
+	cout << endl << endl;
+
+	cout << "We would like to learn your age at the first beacuse of terms of user rights: " << endl;
+	int age;
+	cout << "Your age: (write as a number):  " << endl;
+	cin >> age;
+
+	if (age>= 18) {
+		cout << endl << endl;
+		cout << "Here we go, " << endl;
+
+	}
+
+	else if (age <= 17&& age != 0) {
+		cout << "Sorry, we could not help you open a personal bank account..." << endl;
+		return;
+	}
+
+	else {
+		cout << "Not available answer." << endl;
+			return;
+	}
+	cout << endl << endl;
+	string name;
+	string tcno;
+	string currency;
+	int choosing;
+
+
+	cout << "We would like to start by asking your name in your Id Card:  " << endl;
+	cin >> name;
+
+	cout << "Can we get your Id number (11 numbers):  " << endl;
+	cin >> tcno;
+	if (tcno.length() == 11) {
+		cout << "Thanks" << endl;
+
+	}
+
+	else {
+		cout << "Please enter a valid Id number: " << endl;
+	
+	cin >> tcno;
+
+	if (tcno.length() == 11) {
+		cout << "Thanks" << endl;
+	}
+	else  {
+		cout << "Sorry, we can not help you. " << endl;
+		return;
+	}	}
+
+	cout << endl << endl;
+
+	cout << "Which kind currency do you want to have:" << endl;
+
+	cout << "1) Turkish Lira  " << endl << "2) U.S Dollars " << endl <<"3) Euro  " << endl;
+
+
+	cin >> choosing;
+
+
+
+	if (choosing == 1) {
+		currency = "Turkish Liras";
+	}
+	else if (choosing == 2) {
+		currency = "U.S Dollars";
+	}
+	else if (choosing == 3) {
+		currency = "Euros";
+	}
+	else {
+		"Not supported value";
+		return;
+	}
+
+	baba[t].awvalue(name, age, tcno, currency);
+	baba[t].getvalue();
+	t += 1;
+	
+	cout << endl << endl << "You're returning to the main section";
+	return;
+	}
+
+
+
+
+
+	void showmoney() {
+		cout << "Please write your ID number. If you haven't already been signed, please exit to main menu(write 9):     ";
+		string idcheck;
+		string b = "9";
+		cin >> idcheck;
+
+		if (idcheck == b) {
+			cout << "                  You're returning to the main page.." << endl;
+			return;}
+
+		if (idcheck.length() == 11) {cout << "Thanks" << endl;}
+
+		else {
+			cout << "Please enter a valid Id number:   ";
+
+			cin >> idcheck;
+
+			if (idcheck.length() == 11) {cout << "Thanks" << endl;}
+			else { cout << "Sorry, we can not help you. " << endl; return;}}
+
+
+		bool x = 0;
+
+		for (int i = 0; i <= t; i++) { 
+		
+			if (baba[i].getid() == idcheck) {
+				baba[i].getvalue();
+				 x = 1;
+			}
+ 
+		}
+		
+		switch  (x) 
+		
+		{ case 0: cout << "Sorry, We couldn't find your account" << endl; return;
+
+		case 1: cout << "returning to the main page" << endl; return;	}
+	}
+
+
+
+
+	void convertmoney() {
+
+		cout << "Please write your ID number to reach geldtransaktionen. If you haven't already been signed, please exit to main menu(write 9):     ";
+		string idcheck;
+		string b = "9";
+		cin >> idcheck;
+
+		if (idcheck == b) {
+			cout << "                  You're returning to the main page.." << endl;
+			return;
+		}
+
+		if (idcheck.length() == 11) { cout << "Thanks" << endl; }
+
+		else {
+			cout << "Please enter a valid Id number:   ";
+
+			cin >> idcheck;
+
+			if (idcheck.length() == 11) { cout << "Thanks" << endl; }
+			else { cout << "Sorry, we can not help you. " << endl; return; }
+		}
+
+		int truee= -1;
+		bool x = 0;
+
+		for (int i = 0; i <= t; i++) {
+			
+			if (baba[i].getid() == idcheck) {
+				baba[i].getvalue();
+				x = 1;
+				truee = i;
+			}
+			
+		}
+
+		switch (x)	{case 0: cout << "Sorry, We couldn't find your account" << endl; return;}
+
+		cout << "What would you like to do on your account?" << endl;
+		cout << "1) Lodgment" << endl << "2) Withdraw money" << endl << "3)Exit to menu" << endl;
+		int a;  cin >> a;
+		switch (a)
+		{
+		case 1:         cout << "How much mony do you want to deposit?:  ";
+			int c;
+			cin >> c; 
+			baba[truee].setvalue(c);
+			baba[truee].getvalue();
+			return;
+		case 2:
+			cout << "How much mony do you want to withdraw?:  ";
+			int m;
+			cin >> m;
+			baba[truee].withdraw(m);
+			baba[truee].getvalue();
+			return;
+		
+		case 3: return;
+		default: 
+			cout << "We can not haelp you..." << endl;	}
+	}
+
+
+
+int main() {
+
+	cout << "   ___________WELCOME TO OKAMANBANK___________" << endl;
+
+	int b = 0;
+		do {
+			cout << "THE MENU" << endl;
+			cout << "Please select the sections" << endl;
+			cout << "1)Create Account   " << endl << "2)Check Balance " << endl << "3)Balance Update  "
+			<< endl	<< endl << "9) To leave the application" << endl;
+			cin >> b;
+		
+
+			if (b == 1) {
+				establishing(); 
+			}
+
+			else if (b == 2) {
+				showmoney(); 
+			}
+			else if (b == 3) {
+				convertmoney(); 
+			}
+			else if (b == 9)
+			{
+				break;
+			}
+
+			else
+				cout << "Please enter a valid value" << endl; 
+
+			} while (b!=9);
+	}
+
+
+//THANKS FOR READING -OKAMANOSM
+
+
+
+
+
+
